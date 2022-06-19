@@ -51,28 +51,28 @@ DoodstreamBot = Client(
 
 @DoodstreamBot.on_message(filters.command("start") & ~filters.edited)
 async def start_handler(_, m: Message):
-    await m.reply_text("**Hey**🙏🏻 \n\n I am a Pdisk Movie Searcher Bot.\n\n✅**Send me any movie name i will give you pdisk link**\n\n ", quote=True,
+    await m.reply_text("**Hey**🙏🏻 \n\n I am a Doodstream Movie Searcher Bot.\n\n✅**Send me any movie name i will give you doodstream link**\n\n ", quote=True,
                       reply_markup=InlineKeyboardMarkup([
-                                     [InlineKeyboardButton("For help", url="https://t.me/ALL_WEB_SERIESSS_REQUEST_BOT")]
+                                     [InlineKeyboardButton("For help", url="https://t.me/RequestingHuB")]
                                  ]))
     
     
 @DoodstreamBot.on_message( ~filters.edited, group=-1)
 async def text_handler(_, m: Message):
-    editable = await m.reply_text("**Searching 🔎 Your Movie\n Please Wait...⏳⏳**\n\n**✅For Help - @ALL_WEB_SERIESSS_REQUEST_BOT** ", quote=True,
+    editable = await m.reply_text("**Searching 🔎 Your Movie\n Please Wait...⏳⏳**\n\n**✅For Help - https://t.me/RequestingHuB** ", quote=True,
                                  reply_markup=InlineKeyboardMarkup([
-                                     [InlineKeyboardButton("For Any help contact", url="https://t.me/ALL_WEB_SERIESSS_REQUEST_BOT")]
+                                     [InlineKeyboardButton("For Any help contact", url="https://t.me/RequestingHuB")]
                                  ]))
     response = await search_pdisk_videos(m.text.split(" ", 1)[-1], Configs.PDISK_USERNAME, Configs.PDISK_PASSWORD)
     if isinstance(response, Exception):
         traceback.print_exc()
         try: await editable.edit("Failed to search!",
                                  reply_markup=InlineKeyboardMarkup([
-                                     [InlineKeyboardButton("Request movie", url="https://t.me/ALL_WEB_SERIESSS_REQUEST_BOT")]
+                                     [InlineKeyboardButton("Request movie", url="https://t.me/RequestingHuB")]
                                  ]))
         except MessageNotModified: pass
     elif not response["data"]["list"]:
-        try: await editable.edit("**If Movie Not Available then -  **🥺\n\n **Request Here - @ALL_WEB_SERIESSS_REQUEST_BOT**\n")
+        try: await editable.edit("**If Movie Not Available then -  **🥺\n\n **Request Here - @RequestingHuB**\n")
         except MessageNotModified: pass
     else:
         data = response["data"]["list"]
